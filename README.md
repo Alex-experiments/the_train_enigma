@@ -87,5 +87,17 @@ Evaluation metrics:
 
 ✅ Only solvers that pass all test instances will be included in the leaderboard.
 
-(**WIP**: leaderboards and graphs will be added later.)
+The graphs only include the solvers that passed the all the tests in the specific subset in less than 3 minutes.
+
+## Results on small subset
+![result_small](images/metrics_small.png)
+
+## Results on medium subset
+![result_medium](images/metrics_medium.png)
+
+## Results on big subset
+![result_big](images/metrics_big.png)
+
+## Results on gigantic subset
+![result_gigantic](images/metrics_gigantic.png)
 

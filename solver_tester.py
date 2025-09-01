@@ -4,7 +4,7 @@ import os
 import time
 import tracemalloc
 from argparse import ArgumentParser
-from typing import Optional, Type
+from typing import Optional, Tuple, Type
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -207,12 +207,22 @@ def get_solver_subclass(solver_file_path: str) -> Type[Solver]:
     )
 
 
-def test_subset(folder_path: str, solver_class: Type[Solver]) -> None:
+def test_subset(
+    folder_path: str, solver_class: Type[Solver], verbose: bool = True
+) -> Tuple[float, int, int, int]:
     """Tests the solver on a subset of test cases.
 
     Args:
         folder_path (str): Path to the folder containing the test cases.
         solver_class (Type[Solver]): The solver to be tested.
+        verbose (bool): Toggle printing to the console.
+
+    Returns:
+        Tuple[float, int, int, int]: A tuple containing the following metrics:
+            - cumulated_solving_time (float): Total time taken to solve all test cases in seconds.
+            - peak_memory_usage (int): Peak memory usage during the test in bytes.
+            - cumulated_solver_actions (int): Total number of actions performed by the solver.
+            - cumulated_solver_move_actions (int): Total number of move actions performed by the solver.
     """
     cumulated_solving_time = 0
     peak_memory_usage = 0
@@ -254,11 +264,19 @@ def test_subset(folder_path: str, solver_class: Type[Solver]) -> None:
         cumulated_solver_actions += tester.n_solver_actions
         cumulated_solver_move_actions += tester.n_solver_move_actions
 
-    print(f"Total solving time: {cumulated_solving_time:.6f} seconds")
-    print(f"Peak memory usage: {peak_memory_usage} bytes")
-    print(
-        f"Solved all test cases in {cumulated_solver_actions:,} actions, "
-        f"among which {cumulated_solver_move_actions:,} where move actions"
+    if verbose:
+        print(f"Total solving time: {cumulated_solving_time:.6f} seconds")
+        print(f"Peak memory usage: {peak_memory_usage} bytes")
+        print(
+            f"Solved all test cases in {cumulated_solver_actions:,} actions, "
+            f"among which {cumulated_solver_move_actions:,} where move actions"
+        )
+
+    return (
+        cumulated_solving_time,
+        peak_memory_usage,
+        cumulated_solver_actions,
+        cumulated_solver_move_actions,
     )
 
 

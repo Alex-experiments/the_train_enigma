@@ -9,3 +9,8 @@ dependencies = [
     "numpy>=2.3.2",
     "tqdm>=4.67.1",
 ]
+
+[dependency-groups]
+dev = [
+    "pandas>=2.3.2",
+]

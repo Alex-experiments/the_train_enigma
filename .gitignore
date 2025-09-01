@@ -13,6 +13,8 @@ wheels/
 private_test_cases/
 test_cases_creator.py
 private_test_cases_creator.py
+get_metrics.py
+plot_metrics.py
 
 solvers/*.py
 !solvers/solver.py
